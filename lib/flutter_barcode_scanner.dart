@@ -19,6 +19,8 @@ class FlutterBarcodeScanner {
 
   static Stream? _onBarcodeReceiver;
 
+  static AudioPlayer audioPlayer = AudioPlayer();
+
   /// Scan with the camera until a barcode is identified, then return.
   ///
   /// Shows a scan line with [lineColor] over a scan window. A flash icon is
@@ -41,12 +43,8 @@ class FlutterBarcodeScanner {
 
     /// Get barcode scan result
     final barcodeResult =
-        await _channel.invokeMethod('scanBarcode', params).then(() async {
-                  await AudioPlayer().play(AssetSource('audio/scan_sound.mp3'));
-                } as FutureOr Function(dynamic value)) ??
-            '';
-
-    //await AudioPlayer().play(AssetSource('audio/scan_sound.mp3'));
+        await _channel.invokeMethod('scanBarcode', params) ?? '';
+    await audioPlayer.play(AssetSource('audio/scan_sound.mp3'));
     return barcodeResult;
   }
 
@@ -76,7 +74,6 @@ class FlutterBarcodeScanner {
     // return a stream
     _channel.invokeMethod('scanBarcode', params);
     _onBarcodeReceiver ??= _eventChannel.receiveBroadcastStream();
-    AudioPlayer().play(AssetSource('audio/scan_sound.mp3'));
     return _onBarcodeReceiver;
   }
 }
