@@ -12,9 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_plugin_android_lifecycle: ^2.0.1
+  audioplayers: ^6.0.0
 dev_dependencies:
   test: ^1.16.8
-  audioplayers: ^6.0.0
   lints: ^4.0.0
 
 flutter:

@@ -43,6 +43,7 @@ class FlutterBarcodeScanner {
     final barcodeResult =
         await _channel.invokeMethod('scanBarcode', params) ?? '';
     await AudioPlayer().play(AssetSource('audio/scan_sound.mp3'));
+    //await AudioPlayer().play(AssetSource('audio/scan_sound.mp3'));
     return barcodeResult;
   }
 
@@ -71,7 +72,9 @@ class FlutterBarcodeScanner {
     // Invoke method to open camera, and then create an event channel which will
     // return a stream
     _channel.invokeMethod('scanBarcode', params);
+    AudioPlayer().play(AssetSource('audio/scan_sound.mp3'));
     _onBarcodeReceiver ??= _eventChannel.receiveBroadcastStream();
+
     return _onBarcodeReceiver;
   }
 }
