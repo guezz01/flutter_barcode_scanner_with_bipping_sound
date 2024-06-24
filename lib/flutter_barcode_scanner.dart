@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 /// Scan mode which is either QR code or BARCODE
 enum ScanMode { QR, BARCODE, DEFAULT }
@@ -41,6 +42,7 @@ class FlutterBarcodeScanner {
     /// Get barcode scan result
     final barcodeResult =
         await _channel.invokeMethod('scanBarcode', params) ?? '';
+    await AudioPlayer().play(AssetSource('audio/scan_sound.mp3'));
     return barcodeResult;
   }
 

@@ -29,3 +29,6 @@ flutter:
         pluginClass: FlutterBarcodeScannerPlugin
       ios:
         pluginClass: SwiftFlutterBarcodeScannerPlugin
+
+assets:
+    - assets/audio/
