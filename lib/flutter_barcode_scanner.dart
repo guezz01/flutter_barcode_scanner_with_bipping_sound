@@ -44,7 +44,7 @@ class FlutterBarcodeScanner {
     /// Get barcode scan result
     final barcodeResult =
         await _channel.invokeMethod('scanBarcode', params) ?? '';
-    if (barcodeResult != '') {
+    if (barcodeResult.isNotEmpty) {
       await audioPlayer.play(AssetSource('audio/scan_sound.mp3'));
     }
     return barcodeResult;
